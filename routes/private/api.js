@@ -240,6 +240,8 @@ app.put("/api/v1/refund/:ticketId", async function (req, res) {
       return res.status(400).send("Cannot refund past or current dated tickets");
     }
 
+    
+  
     // Retrieve the user's subscription from the subscription table
     const userSubscription = await db("se_project.subsription")
       .where("userid", ticket.userid)
@@ -249,7 +251,7 @@ app.put("/api/v1/refund/:ticketId", async function (req, res) {
     if (userSubscription) {
       // Check if there is a ticket associated with the user ID and subscription ID
       const associatedTicket = await db("se_project.tickets")
-        .where("userid", ticket.userId)
+        .where("userid", ticket.userid)
         .where("subid", userSubscription.id)
         .first();
 
@@ -259,6 +261,7 @@ app.put("/api/v1/refund/:ticketId", async function (req, res) {
           ticketid: ticketId,
           status: "pending",
           userid:ticket.userid,
+          refundamount:0
           
         });
 
@@ -266,13 +269,14 @@ app.put("/api/v1/refund/:ticketId", async function (req, res) {
       }
     }else{
       const onlineticket = await db("se_project.tickets")
-      .where("userid", ticket.userId)
+      .where("userid", ticket.userid)
       .first();
        if(onlineticket){
         await db("se_project.refund_requests").insert({
           ticketid: ticketId,
           status: "pending",
           userid:ticket.userid,
+          refundamount:25
           
         });
         return res.status(200).send("Ticket refund requested");
