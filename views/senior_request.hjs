@@ -18,7 +18,7 @@
       </div>
     <script>
       $(document).ready(function() {
-        $("#Refund").click(function() {
+        $("#Submit").click(function() {
           const nationalid = $('#nationalid').val();
 
           if (!nationalid) {
@@ -59,7 +59,7 @@
         <div class="form-group">
             <label for="National ID" class="col-sm-2 control-label">National ID</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="enternationalid" name="enternationalid" placeholder="Enter National ID" value="">
+                <input type="text" class="form-control" id="nationalid" name="nationalid" placeholder="Enter National ID" value="">
             </div>
         </div>
         </div>

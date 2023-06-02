@@ -27,7 +27,7 @@
           }
 
           $.ajax({
-            type: "PUT",
+            type: "POST",
             url: '/api/v1/refund/' + ticketId,
             contentType: 'application/json',
             success: function(serverResponse) {

@@ -219,7 +219,7 @@ module.exports = function (app) {
   });
   
   
-app.put("/api/v1/refund/:ticketId", async function (req, res) {
+app.post("/api/v1/refund/:ticketId", async function (req, res) {
   const ticketId = req.params.ticketId;
 
   try {

@@ -100,7 +100,12 @@ module.exports = function(app) {
   app.get('/requests/refund', async function(req, res) {
     const user = await getUser(req);
     const subsription = await db.select('*').from('se_project.subsription').where("userid", user.userid);
-    return res.render('refund_request_send');
+    return res.render('make_refund_request');
+  });
+  app.get('/senior/request', async function(req, res) {
+    const user = await getUser(req);
+    const subsription = await db.select('*').from('se_project.subsription').where("userid", user.userid);
+    return res.render('senior_request');
   });
 
 
