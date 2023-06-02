@@ -19,26 +19,31 @@
     <script>
       $(document).ready(function() {
         $("#Refund").click(function() {
-          const ticketId = $('#ticketId').val();
+          const nationalid = $('#nationalid').val();
 
-          if (!ticketId) {
-            alert('Ticket ID required');
+          if (!nationalid) {
+            alert('National ID is required');
             return;
           }
-
+          
+          const data = {
+            nationalid
+            };
+      
           $.ajax({
-            type: "PUT",
-            url: '/api/v1/refund/' + ticketId,
+            type: "POST",
+            url: '/api/v1/senior/request',
+            data: JSON.stringify(data),
             contentType: 'application/json',
             success: function(serverResponse) {
               if (serverResponse) {
-                alert('Ticket refunded');
+                alert('Request made!');
                
               }
             },
             error: function(errorResponse) {
               if (errorResponse) {
-                alert(`Ticket not refunded: ${errorResponse.responseText}`);
+                alert(`Request not made: ${errorResponse.responseText}`);
               }
             }
           });
@@ -47,21 +52,26 @@
     </script>
     
       <div class="center">
-        <h1>Refund Ticket</h1>
+    <form class="form-horizontal" style="width: 50%;">
+        <h1 style="text-align: right;">Request Senior</h1>
         <br/>
-        <form class="form-horizontal" style="width: 50%;">
-          <div class="form-group">
-            <label for="Enter Ticket ID" class="col-sm-2 control-label">Enter Ticket ID</label>
+   
+        <div class="form-group">
+            <label for="National ID" class="col-sm-2 control-label">National ID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="ticketId" name="ticketId" placeholder="TicketID" value="">
+                <input type="text" class="form-control" id="enternationalid" name="enternationalid" placeholder="Enter National ID" value="">
             </div>
-          </div>
-          <div class="form-group">
+        </div>
+        </div>
+        <br/>
+        <br/>
+        
+        <div class="form-group">
             <div class="col-sm-10 col-sm-offset-2">
-              <input id="Refund" name="Refund" type="button" value="Refund" class="btn btn-primary">
+                <input id="Submit" name="Submit" type="button" value="Submit Senior Request" class="btn btn-primary">
             </div>
-          </div>
-        </form>
-      </div>
+        </div>
+    </form>
+</div>
   </body>
 </html>
